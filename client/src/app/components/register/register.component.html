@@ -1,0 +1,110 @@
+<form [formGroup]="form"
+      (ngSubmit)="onSubmit()"
+      novalidate
+      class="needs-validation">
+  <div class="form-group">
+    <label for="username">Username</label>
+    <div>
+      <input id="username"
+             type="text"
+             name="username"
+             class="form-control"
+             autocomplete="off"
+             placeholder="*Username"
+             [formControlName]="'username'"
+             [ngClass]="{'is-invalid': form.get('username').invalid && (form.get('username').dirty  || form.get('username').touched)}">
+      <div class="invalid-feedback">
+        <div *ngIf="form.get('username').errors?.required">
+          Name is required
+        </div>
+        <div *ngIf="form.get('username').errors?.minlength">
+          Required length {{form.get('username').errors?.minlength['requiredLength']}}. Actual length
+          {{form.get('username').errors?.minlength['actualLength']}}.
+        </div>
+        <div *ngIf="form.get('username').errors?.maxlength">
+          Required length {{form.get('username').errors?.maxlength['requiredLength']}}. Actual length
+          {{form.get('username').errors?.maxlength['actualLength']}}.
+        </div>
+        <div *ngIf="form.get('username').errors?.NotValid">
+          Name can't have specific symbols.
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="email">E-mail</label>
+    <div>
+      <input id="email"
+             type="text"
+             name="email"
+             class="form-control"
+             autocomplete="off"
+             placeholder="*E-mail"
+             [formControlName]="'email'"
+             [ngClass]="{'is-invalid': form.get('email').invalid && (form.get('email').dirty  || form.get('email').touched)}">
+      <div class="invalid-feedback">
+        <div *ngIf="form.get('email').errors?.required">
+          Email is required
+        </div>
+        <div *ngIf="form.get('email').errors?.minlength">
+          Required length {{form.get('email').errors?.minlength['requiredLength']}}. Actual length
+          {{form.get('email').errors?.minlength['actualLength']}}.
+        </div>
+        <div *ngIf="form.get('email').errors?.maxlength">
+          Required length {{form.get('email').errors?.maxlength['requiredLength']}}. Actual length
+          {{form.get('email').errors?.maxlength['actualLength']}}.
+        </div>
+        <div *ngIf="form.get('email').errors?.NotValid">
+          Not valid email
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="password">Password</label>
+    <div>
+      <input id="password"
+             type="password"
+             name="password"
+             class="form-control"
+             autocomplete="off"
+             placeholder="*Password"
+             [formControlName]="'password'"
+             [ngClass]="{'is-invalid': form.get('password').invalid && (form.get('email').dirty  || form.get('password').touched)}">
+      <div class="invalid-feedback">
+        <div *ngIf="form.get('password').errors?.required">
+          Password is required
+        </div>
+        <div *ngIf="form.get('password').errors?.NotValid">
+          Password should have specific symbols
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="confirm">Confirm Password</label>
+    <div>
+      <input id="confirm"
+             type="password"
+             name="confirm"
+             class="form-control"
+             autocomplete="off"
+             placeholder="*Confirm Password"
+             [formControlName]="'confirm'"
+             [ngClass]="{'is-invalid': form.get('confirm').invalid && (form.get('confirm').dirty  || form.get('confirm').touched) || form.errors?.notSame}">
+      <div class="invalid-feedback">
+        <div *ngIf="form.get('confirm').errors?.required">
+          Confirm password
+        </div>
+        <div *ngIf="form.errors?.notSame">
+          Passwords not same
+        </div>
+      </div>
+    </div>
+  </div>
+  <input type="submit"
+         class="btn btn-primary"
+         value="Submit">
+</form>
+
+<p>Form value: {{ form.value | json }}</p>
