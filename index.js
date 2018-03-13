@@ -1,10 +1,13 @@
 const express = require('express');
 const app = express();
 const config = require('./config/database');
+const bodyParser = require('body-parser');
 const path = require('path');
+const mongoose = require('mongoose');
 const port = 3000;
 
-const mongoose = require('mongoose');
+const auth = require('./routes/authentication');
+
 mongoose.connect(config.uri, (err) => {
   if (err) {
     console.log('Could NOT conntect to database: ', err);
@@ -12,6 +15,11 @@ mongoose.connect(config.uri, (err) => {
     console.log('Connected to database: ' + config.db);
   }
 });
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+app.use('/auth', auth);
 
 app.use(express.static(path.join(__dirname, '/client/dist')));
 
