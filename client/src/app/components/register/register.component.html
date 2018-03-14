@@ -1,3 +1,7 @@
+<div class="{{messageStatus}}" role="alert">
+  {{message}}
+</div>
+
 <form [formGroup]="form"
       (ngSubmit)="onSubmit()"
       novalidate
@@ -12,7 +16,7 @@
              autocomplete="off"
              placeholder="*Username"
              [formControlName]="'username'"
-             [ngClass]="{'is-invalid': form.get('username').invalid && (form.get('username').dirty  || form.get('username').touched)}">
+             [ngClass]="{'is-invalid': form.get('username').invalid && (form.get('username').dirty  || form.get('username').touched), 'is-valid': !form.get('username').invalid && (form.get('username').dirty  || form.get('username').touched)}">
       <div class="invalid-feedback">
         <div *ngIf="form.get('username').errors?.required">
           Name is required
@@ -28,6 +32,12 @@
         <div *ngIf="form.get('username').errors?.NotValid">
           Name can't have specific symbols.
         </div>
+        <div *ngIf="form.get('username').errors?.checkField">
+          This username already taken.
+        </div>
+      </div>
+      <div class="valid-feedback">
+        You can use this username
       </div>
     </div>
   </div>
@@ -41,7 +51,7 @@
              autocomplete="off"
              placeholder="*E-mail"
              [formControlName]="'email'"
-             [ngClass]="{'is-invalid': form.get('email').invalid && (form.get('email').dirty  || form.get('email').touched)}">
+             [ngClass]="{'is-invalid': form.get('email').invalid && (form.get('email').dirty  || form.get('email').touched), 'is-valid': !form.get('email').invalid && (form.get('email').dirty  || form.get('email').touched)}">
       <div class="invalid-feedback">
         <div *ngIf="form.get('email').errors?.required">
           Email is required
@@ -57,6 +67,12 @@
         <div *ngIf="form.get('email').errors?.NotValid">
           Not valid email
         </div>
+        <div *ngIf="form.get('email').errors?.checkField">
+          This email already taken.
+        </div>
+      </div>
+      <div class="valid-feedback">
+        You can use this email
       </div>
     </div>
   </div>
@@ -104,7 +120,9 @@
   </div>
   <input type="submit"
          class="btn btn-primary"
-         value="Submit">
+         value="Submit"
+         [disabled]="form.invalid">
 </form>
 
 <p>Form value: {{ form.value | json }}</p>
+<p>Form value: {{ form.invalid | json }}</p>

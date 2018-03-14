@@ -7,7 +7,7 @@ const lengthNameValidator = function (name) {
 };
 
 const nameValidator = function (name) {
-  return /^[A-Za-z0-9]+(?:[ _-][A-Za-z0-9]+)*$/.test(name);
+  return /^[a-zA-Z0-9]+$/.test(name);
 };
 
 
@@ -25,7 +25,7 @@ const passwordValidator = function (password) {
 };
 
 const UserSchema = new Schema({
-  name: {
+  username: {
     type: String,
     unique: true,
     lowercase: true,
@@ -81,7 +81,6 @@ UserSchema.pre('save', function (next) {
       if (err) return next(err);
 
       user.password = hash;
-      console.log(hash);
       next();
     });
   });

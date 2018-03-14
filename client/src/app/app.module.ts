@@ -1,6 +1,8 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
 
 
 import {AppComponent} from './app.component';
@@ -8,6 +10,8 @@ import {HomeComponent} from './components/home/home.component';
 import {AppRoutingModule} from './app-routing.module';
 import {NavbarComponent} from './components/navbar/navbar.component';
 import {DashboardComponent} from './components/dashboard/dashboard.component';
+import {RegisterComponent} from './components/register/register.component';
+import {AuthService} from './services/auth.service';
 
 
 @NgModule({
@@ -15,14 +19,18 @@ import {DashboardComponent} from './components/dashboard/dashboard.component';
     AppComponent,
     HomeComponent,
     NavbarComponent,
-    DashboardComponent
+    DashboardComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgbModule.forRoot()
+    NgbModule.forRoot(),
+    ReactiveFormsModule,
+    FormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

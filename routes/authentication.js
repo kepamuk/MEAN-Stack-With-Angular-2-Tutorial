@@ -3,14 +3,11 @@ const router = express.Router();
 
 const UserModel = require('../models/user');
 
-router.post('/registration', function (req, res) {
-
-  // console.log(req.body);
-
+router.post('/registration', (req, res) => {
 
   const user = new UserModel(req.body);
 
-  if (!req.body.name) {
+  if (!req.body.username) {
     res.send({success: false, message: 'Name is required'});
   } else if (!req.body.email) {
     res.send({success: false, message: 'Email is required'});
@@ -21,7 +18,7 @@ router.post('/registration', function (req, res) {
       if (err) {
         if (err.code === 11000) {
           res.send({success: false, message: 'Duplicate'});
-        } else if(err.message) {
+        } else if (err.message) {
           res.send({success: false, message: err.message});
         } else {
           res.send({success: false, message: err});
@@ -32,6 +29,22 @@ router.post('/registration', function (req, res) {
     });
   }
 
+});
+
+router.get('/checkField/:value&:type', (req, res) => {
+  let type = {};
+  type[req.params.type] = req.params.value;
+
+  UserModel.findOne(type,
+    function (err, result) {
+      if (err) return handleError(err);
+
+      result ? res.send({success: false, message: `This ${req.params.type} already taken`}) : res.send({success: true, message: `This ${req.params.type} you can use`});
+    });
+});
+
+router.get('/test', function (req, res) {
+  res.send({success: true, message: 'test'});
 });
 
 module.exports = router;
