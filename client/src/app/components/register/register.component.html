@@ -86,7 +86,7 @@
              autocomplete="off"
              placeholder="*Password"
              [formControlName]="'password'"
-             [ngClass]="{'is-invalid': form.get('password').invalid && (form.get('email').dirty  || form.get('password').touched)}">
+             [ngClass]="{'is-invalid': form.get('password').invalid && (form.get('password').dirty  || form.get('password').touched)}">
       <div class="invalid-feedback">
         <div *ngIf="form.get('password').errors?.required">
           Password is required
