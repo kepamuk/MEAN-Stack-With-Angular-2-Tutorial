@@ -50,8 +50,6 @@ export class RegisterComponent implements OnInit {
   }
 
   checkField(type, control: AbstractControl) {
-    // console.log(type);
-    // console.log(control.value);
 
     return this.auth.checkField(control.value, type)
       .map((data: any) => {
@@ -77,15 +75,17 @@ export class RegisterComponent implements OnInit {
         if (data.success) {
           this.messageStatus = 'alert alert-success';
           this.message = data.message;
+
+          this.form.reset();
+          setTimeout(() => {
+            this.router.navigate(['/login']);
+          }, 3000);
         } else {
           this.messageStatus = 'alert alert-danger';
           this.message = data.message;
+
+          this.formEnable();
         }
-        this.formEnable();
-        this.form.reset();
-        setTimeout(() => {
-          this.router.navigate(['/login']);
-        }, 3000);
       });
   }
 
