@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcrypt-nodejs');
 
 const lengthNameValidator = function (name) {
   return name.length >= 2 && name.length <= 10;
@@ -77,7 +77,7 @@ UserSchema.pre('save', function (next) {
   bcrypt.genSalt(10, function (err, salt) {
     if (err) return next(err);
 
-    bcrypt.hash(user.password, salt, null, function (err, hash) {
+    bcrypt.hash(user.password, salt, null, (err, hash) => {
       if (err) return next(err);
 
       user.password = hash;
@@ -87,7 +87,7 @@ UserSchema.pre('save', function (next) {
 
 });
 
-UserSchema.methods.comparePassword = function(password) {
+UserSchema.methods.comparePassword = function (password) {
   return bcrypt.compareSync(password, this.password);
 };
 

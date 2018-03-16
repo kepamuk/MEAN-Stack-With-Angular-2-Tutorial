@@ -16,7 +16,7 @@ router.post('/registration', (req, res) => {
   } else if (!req.body.password) {
     res.send({success: false, message: 'Password is required'});
   } else {
-console.log(223143);
+
     user.save((err) => {
       if (err) {
         if (err.code === 11000) {
@@ -90,7 +90,7 @@ function verifyJwt(req, res, next) {
 }
 
 router.get('/test', (req, res) => {
-  res.send({success: false, message: 'Passwords dont match'});
+  res.send({success: true, message: 'test'});
 });
 
 module.exports = router;
