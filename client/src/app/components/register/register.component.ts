@@ -21,23 +21,23 @@ export class RegisterComponent implements OnInit {
               private auth: AuthService,
               private router: Router) {
     this.form = this.fb.group({
-        username: ['', [
+        username: ['stas1', [
           Validators.required,
           Validators.minLength(2),
           Validators.maxLength(10),
           this.validatorRegex.bind(this, /^[a-zA-Z0-9]+$/)
         ], this.checkField.bind(this, 'username')],
-        email: ['', [
+        email: ['kepamuk@yandex1.ru', [
           Validators.required,
           Validators.minLength(5),
           Validators.maxLength(30),
           this.validatorRegex.bind(this, /^[a-zA-Z0-9.!#$%&’*+\/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/)
         ], this.checkField.bind(this, 'email')],
-        password: ['', [
+        password: ['Q7e%dSd$', [
           Validators.required,
           this.validatorRegex.bind(this, /^(?=\S*[a-z])(?=\S*[A-Z])(?=\S*\d)(?=\S*[^\w\s])\S{8,}$/)
         ]],
-        confirm: ['', [
+        confirm: ['Q7e%dSd$', [
           Validators.required
         ]]
       },

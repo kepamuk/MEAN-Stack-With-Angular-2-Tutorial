@@ -12,6 +12,8 @@ import {NavbarComponent} from './components/navbar/navbar.component';
 import {DashboardComponent} from './components/dashboard/dashboard.component';
 import {RegisterComponent} from './components/register/register.component';
 import {AuthService} from './services/auth.service';
+import { ProfileComponent } from './components/profile/profile.component';
+import { LoginComponent } from './components/login/login.component';
 
 
 @NgModule({
@@ -20,7 +22,9 @@ import {AuthService} from './services/auth.service';
     HomeComponent,
     NavbarComponent,
     DashboardComponent,
-    RegisterComponent
+    RegisterComponent,
+    ProfileComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
